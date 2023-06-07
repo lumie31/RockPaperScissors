@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rock, Paper, Scissors
 
-## Getting Started
+A Rock, Paper, Scissors game with the ability to bet on the winning position.
 
-First, run the development server:
+A live copy of the project can be viewed here: https://rockpaperscissors.vercel.app
+
+## Specifications
+
+A player will start with a balance of 5000.
+
+### Description
+
+- There should be three betting positions, rock, paper, scissors.
+- Player starts with a balance of 5000.
+- Player can bet on rock, paper, or scissors, but not on all three at the same time.
+- The bet is reduced from the balance.
+- When betting done button is clicked, the computer runs a random paper, scissors, rock match.
+- Player choice should be compared to computers choice and only one bet can win – every tie counts as loss
+- If player bets on one of them and wins, the return is 14 times the bet.
+- If player bets on two of them and wins the return is 3 times the bet.
+- After round ends the return adds to the balance
+- Player cannot bet if player has less balance than available for bet.
+- Each bet should be 500 (player can place several bets on one position: 500, 1000, 1500 etc)
+
+## Running the Project locally
+
+These instructions will get you a copy of this project up and running on your local machine for development and testing purposes.
+
+### Installing
+
+- Open your local development terminal
+- `cd` into the directory that you want the project to reside e.g:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+cd projects
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Clone the repository into that directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/lumie31/RockPaperScissors.git
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Run `npm install` to install the project dependencies
+- Run `npm run dev` to start a local development server
+- Navigate to http://localhost:3000 to view the project in your browser
 
-## Learn More
+## Built With
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- React (Next.js)
+- TypeScript
+- Tailwindcss
+- Vercel
