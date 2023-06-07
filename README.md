@@ -2,7 +2,9 @@
 
 A Rock, Paper, Scissors game with the ability to bet on the winning position.
 
-A live copy of the project can be viewed here: https://rockpaperscissors.vercel.app
+A live copy of the project can be viewed here: https://rock-paper-scissors-vert.vercel.app
+
+![Game Screenshot](./public/images/game.png)
 
 ## Specifications
 
