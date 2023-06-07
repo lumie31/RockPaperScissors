@@ -225,7 +225,7 @@ export default function Game() {
       )}
 
       <section className='flex flex-col items-center mt-[12vh] m-8'>
-        <h6 className='uppercase my-4 text-[#cdae81] text-center text-sm font-extrabold'>
+        <h6 className='uppercase my-4 text-[#cdae81] text-center text-sm font-bold'>
           Pick your Positions
         </h6>
         <div className='flex gap-2 flex-wrap justify-center'>
