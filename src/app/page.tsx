@@ -29,12 +29,14 @@ export default function Game() {
   const [scissorsBetNum, setScissorsBetNum] = useState<number>(0);
 
   const [cpuChoice, setCpuChoice] = useState<string>('');
-  const [decision, setDecision] = useState<string | undefined>('');
-
   const [playerChoice, setPlayerChoice] = useState<PlayerChoice[]>([]);
 
+  const [decision, setDecision] = useState<string | undefined>('');
+  const [winning, setWinning] = useState<number>(0);
+  const [loss, setLoss] = useState<boolean>(false);
+
   function userBet(betType: BetType) {
-    if (bet >= balance) {
+    if (balance <= 0) {
       alert('Insufficient funds to place a bet!');
       return;
     }
@@ -44,6 +46,11 @@ export default function Game() {
       playerChoice.findIndex((x) => x.selected === betType) === -1
     ) {
       alert('You cannot select more than 2 choices!');
+      return;
+    }
+
+    if (rockWin || paperWin || scissorsWin || loss) {
+      alert('Click the clear button to make new bet!');
       return;
     }
 
@@ -59,6 +66,7 @@ export default function Game() {
           return [...newData, { selected: 'rock', amount: rockNum }];
         });
         setBet(bet + 500);
+        setBalance(balance - 500);
         break;
       case 'paper':
         setPaperBetNum(paperNum);
@@ -67,6 +75,7 @@ export default function Game() {
           return [...newData, { selected: 'paper', amount: paperNum }];
         });
         setBet(bet + 500);
+        setBalance(balance - 500);
         break;
       case 'scissors':
         setScissorsBetNum(scissorsNum);
@@ -75,6 +84,7 @@ export default function Game() {
           return [...newData, { selected: 'scissors', amount: scissorsNum }];
         });
         setBet(bet + 500);
+        setBalance(balance - 500);
         break;
       default:
         // Handle default case properly
@@ -93,6 +103,8 @@ export default function Game() {
     setPlayerChoice([]);
     setCpuChoice('');
     setBet(0);
+    setWinning(0);
+    setLoss(false);
   }
 
   function handleGamePlay() {
@@ -170,34 +182,41 @@ export default function Game() {
 
     if (decision === computerChoice) {
       // Tie counts as a loss
-      setBalance(balance - bet);
+      setBalance(balance);
+      setLoss(true);
       alert('Player lose - Tie condition');
     } else if (decision === 'rock' && computerChoice === 'scissors') {
       setWin(win + 1);
       setRockWin(true);
-      setBalance(balance - bet + multiplier * bet);
+      setBalance(balance + multiplier * bet);
+      setWinning(multiplier * bet);
       alert('Player wins - Rock crushes Scissors');
     } else if (decision === 'rock' && computerChoice === 'paper') {
-      setBalance(balance - bet);
+      setBalance(balance);
+      setLoss(true);
       alert('Player lose - Paper slices Rock');
     } else if (decision === 'scissors' && computerChoice === 'paper') {
       setWin(win + 1);
       setScissorsWin(true);
-      setBalance(balance - bet + multiplier * bet);
+      setBalance(balance + multiplier * bet);
+      setWinning(multiplier * bet);
       alert('Player win - Scissors cuts Paper');
     } else if (decision === 'scissors' && computerChoice === 'rock') {
-      setBalance(balance - bet);
+      setBalance(balance);
+      setLoss(true);
       alert('Player lose - Rock crushes Scissors');
     } else if (decision === 'paper' && computerChoice === 'rock') {
       setWin(win + 1);
       setPaperWin(true);
-      setBalance(balance - bet + multiplier * bet);
+      setBalance(balance + multiplier * bet);
+      setWinning(multiplier * bet);
       alert('Player win - Paper slices Rock');
     } else if (decision === 'paper' && computerChoice === 'scissors') {
-      setBalance(balance - bet);
+      setBalance(balance);
+      setLoss(true);
       alert('Player lose - Scissors cuts Paper');
     } else {
-      setBalance(balance - bet + bet * multiplier);
+      setBalance(balance + bet * multiplier);
       // Handle this case properly
       alert('Unhandled Condition');
     }
@@ -221,13 +240,24 @@ export default function Game() {
         ''
       )}
       {rockWin || paperWin || scissorsWin ? (
-        <p className='text-center text-[30px] uppercase mt-2 text-[#cdae81] font-bold'>{`${decision} wins!!! 🎉`}</p>
+        <div>
+          <p className='text-center text-[30px] uppercase mt-2 text-[#cdae81] font-bold'>{`${decision} wins!!! 🎉`}</p>
+          <p className='text-[#cdae81] text-[25px] text-center mt-2 font-bold uppercase'>
+            You win: <span className='text-white'>{winning}</span>
+          </p>
+        </div>
       ) : (
-        <p
-          className={`${
-            !rockWin || !paperWin || !scissorsWin ? 'hidden' : 'block'
-          } text-center text-lg uppercase`}
-        >{`${decision} lose`}</p>
+        ''
+      )}
+      {loss ? (
+        <div>
+          <p className='text-center text-[30px] uppercase mt-8 text-red-500 font-bold'>{`You lost!!! ☹️`}</p>
+          <p className='text-center text-[25px] capitalize italic mt-2 text-[#cdae81]'>
+            Try Again
+          </p>
+        </div>
+      ) : (
+        ''
       )}
 
       <section className='flex flex-col items-center mt-[12vh] mx-4'>
@@ -254,7 +284,7 @@ export default function Game() {
             scissorsBetNum={scissorsBetNum}
           />
         </div>
-        {rockWin || paperWin || scissorsWin ? (
+        {rockWin || paperWin || scissorsWin || loss ? (
           <button
             onClick={clearSelection}
             className='text-[#cdae81] uppercase border-2 border-[#cdae81] bg-slate-800 px-8 py-3 text-lg rounded-full my-8'
