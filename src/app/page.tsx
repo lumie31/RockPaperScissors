@@ -36,6 +36,11 @@ export default function Game() {
   const [loss, setLoss] = useState<boolean>(false);
 
   function userBet(betType: BetType) {
+    if (rockWin || paperWin || scissorsWin || loss) {
+      alert('Click the clear button to make new bet!');
+      return;
+    }
+
     if (balance <= 0) {
       alert('Insufficient funds to place a bet!');
       return;
@@ -46,11 +51,6 @@ export default function Game() {
       playerChoice.findIndex((x) => x.selected === betType) === -1
     ) {
       alert('You cannot select more than 2 choices!');
-      return;
-    }
-
-    if (rockWin || paperWin || scissorsWin || loss) {
-      alert('Click the clear button to make new bet!');
       return;
     }
 
