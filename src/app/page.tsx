@@ -224,7 +224,7 @@ export default function Game() {
         >{`${decision} lose`}</p>
       )}
 
-      <section className='flex flex-col items-center mt-[12vh] m-8'>
+      <section className='flex flex-col items-center mt-[12vh] mx-4'>
         <h6 className='uppercase my-4 text-[#cdae81] text-center text-sm font-bold'>
           Pick your Positions
         </h6>
