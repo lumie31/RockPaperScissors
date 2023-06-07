@@ -25,7 +25,7 @@ export default function Paper({
       ) : (
         ''
       )}
-      <p className='uppercase font-semibold text-xl text-green-600'>Paper</p>
+      <p className='uppercase font-bold text-xl text-green-600'>Paper</p>
     </div>
   );
 }

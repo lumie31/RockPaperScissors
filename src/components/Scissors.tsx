@@ -25,7 +25,7 @@ export default function Scissors({
       ) : (
         ''
       )}
-      <p className='uppercase font-semibold text-xl text-red-600'>Scissors</p>
+      <p className='uppercase font-bold text-xl text-red-600'>Scissors</p>
     </div>
   );
 }
