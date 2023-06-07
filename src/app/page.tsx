@@ -87,6 +87,12 @@ export default function Game() {
     setRockWin(false);
     setPaperWin(false);
     setScissorsWin(false);
+    setRockBetNum(0);
+    setPaperBetNum(0);
+    setScissorsBetNum(0);
+    setPlayerChoice([]);
+    setCpuChoice('');
+    setBet(0);
   }
 
   function handleGamePlay() {
