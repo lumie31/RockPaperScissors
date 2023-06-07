@@ -18,7 +18,7 @@ export default function Scissors({
         scissorsWin ? 'border-4' : 'border-2'
       } py-3 border-red-600 flex flex-col justify-around items-center rounded-lg hover:cursor-pointer`}
     >
-      {bet ? (
+      {bet && scissorsBetNum !== 0 ? (
         <span className='border-4 border-blue-700 p-1 rounded-full bg-white'>
           {scissorsBetNum}
         </span>
